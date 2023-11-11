@@ -2,7 +2,7 @@
 public class SortingAlgorithms {
     public static void main(String[] args) {
         int[] myArray = {2,8,3,5,6,7,1};
-        mergeSort(myArray, 0, myArray.length-1);
+        quickSort(myArray, 0, myArray.length-1);
         for(int i=0;i<myArray.length;i++){
             System.out.print(myArray[i] + " ");
         }
@@ -26,6 +26,40 @@ public class SortingAlgorithms {
     public static void bubbleSort(int[] arr){
 
     }
+
+/*----------------------------------------------QUICK SORT--------------------------------------------------------------*/
+
+    public static int partition(int[] arr, int l, int r){
+        int p=r;
+        int i=l;
+        int j=p-1;
+
+        while(j>=i){
+            while(i <= j && arr[i] < arr[p]){
+                i++;
+            }
+
+            while(j >= i && arr[j]>arr[p]){
+                j--;
+            }
+
+            if(i<=j){
+                swap(arr, i, j);
+            }
+        }
+        swap(arr,p,i);
+        return i;
+    }
+
+    public static void quickSort(int[] A, int l, int r){
+        if(l<r){  //to check if we have an array that has at least 2 elements
+            int q = partition(A, l, r);
+            quickSort(A, l, q-1);
+            quickSort(A, q+1, r);
+        }
+    }
+
+/*----------------------------------------------MERGE SORT--------------------------------------------------------------*/
 
     public static void mergeSort(int[] arr, int lo, int hi) {
         if (lo < hi) {
