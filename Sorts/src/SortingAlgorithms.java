@@ -59,6 +59,26 @@ public class SortingAlgorithms {
         }
     }
 
+    public static int quickSelect(int[] arr, int k, int l, int r) {
+
+        if (k > 0 && k <= r - l + 1) {
+            int partitionIndex = partition(arr, l, r);
+
+            if (partitionIndex - l == k - 1) {
+                return arr[partitionIndex];
+
+            } else if (partitionIndex - l > k - 1) {
+                return quickSelect(arr, k, l, partitionIndex - 1);
+
+            } else {
+                return quickSelect(arr, k - (partitionIndex - l + 1), partitionIndex + 1, r);
+            }
+        }
+
+
+        return Integer.MAX_VALUE;
+    }
+
 /*----------------------------------------------MERGE SORT--------------------------------------------------------------*/
 
     public static void mergeSort(int[] arr, int lo, int hi) {
