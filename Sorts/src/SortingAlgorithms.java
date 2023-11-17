@@ -1,21 +1,43 @@
-
+import java.util.Random;
 public class SortingAlgorithms {
     public static void main(String[] args) {
         int[] myArray = {2,8,3,5,6,7,1};
-        insertionSort(myArray);
-        for(int i=0;i<myArray.length;i++){
-            System.out.print(myArray[i] + " ");
+        System.out.println("Beginning array: ");
+        printArray(myArray);
+
+        selectionSort(myArray);
+        System.out.println("\nSorted:");
+        printArray(myArray);
+
+        knuthShuffle(myArray);
+        System.out.println("\nShuffled: ");
+        printArray(myArray);
+    }
+
+
+    public static void knuthShuffle(int[] arr){
+        Random random = new Random();
+        int n=arr.length;
+        int j;
+        for(int i=n-1 ; i>0 ; i--){
+            j= random.nextInt(i);
+            swap(arr, i,j);
         }
     }
 
 
     public static void selectionSort(int[] arr){
-        for(int i=0 ; i<arr.length - 1 ; i++){
-            for(int j=i ; j<arr.length ; j++){
-                if(arr[j]<arr[i]){
-                    swap(arr,i,j);
+        for(int i=0 ; i<arr.length ; i++){
+            int min = arr[i];
+            int minIndex = i;
+            for(int j=i+1; j<arr.length ; j++){
+                if(min>arr[j]){
+                    min = arr[j];
+                    minIndex = j;
                 }
             }
+            arr[minIndex] = arr[i];
+            arr[i] = min;
         }
     }
 
@@ -33,8 +55,19 @@ public class SortingAlgorithms {
     }
 
 
-    public static void bubbleSort(int[] arr){
+    public static void bubbleSort(int[] arr, int n){
 
+        if(n==1){
+            return;
+        }
+
+        for(int i=0 ; i<n-1 ; i++){
+            if(arr[i]>arr[i+1]){
+                swap(arr,i,i+1);
+            }
+        }
+
+        bubbleSort(arr, n-1);
     }
 
 /*----------------------------------------------QUICK SORT--------------------------------------------------------------*/
@@ -138,5 +171,11 @@ public class SortingAlgorithms {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+    }
+
+    public static void printArray(int[] arr){
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i] + " ");
+        }
     }
 }
